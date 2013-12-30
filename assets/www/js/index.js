@@ -1,0 +1,55 @@
+var util = {};
+
+util.roundToDay = function(d){
+  if(!d) d = new Date();
+  var d2 = new Date(Date.UTC(
+        d.getUTCFullYear(),
+        d.getUTCMonth(),
+        d.getUTCDate()
+        ));
+  return d2;
+};
+
+util.pad = function(d,n){
+  if(!n) n=2;
+  d = ""+d;
+  while(d.length<n){
+    d = "0"+d;
+  }
+  return d;
+}
+
+util.prettyDate = function(d){
+  if(!d) d = new Date();
+  var d_rounded = util.roundToDay(d);
+  var now_rounded = util.roundToDay();
+  if(+d_rounded === +now_rounded){
+    var hour = d.getHours();
+    var ampm = 'AM';
+    if(hour>=12){
+      hour %= 12;
+      ampm = 'PM';
+    }
+    if(hour===0) hour=12;
+    var minutes = util.pad(d.getMinutes());
+    return hour+":"+minutes+" "+ampm;
+  }
+  return (d.getMonth()+1)+"/"+d.getDate();
+};
+
+function hideSidebar(){
+  $('.sidebar').sidebar('hide');
+}
+function toggleSidebar(){
+  $('.sidebar').sidebar('toggle');
+}
+function onready(){
+  $('.sidebar').sidebar({
+    overlay: true
+  });
+  document.addEventListener("menubutton", toggleSidebar, false);
+  Pebble("LibreText");
+  Messaging();
+}
+
+document.addEventListener('deviceready', onready, false);

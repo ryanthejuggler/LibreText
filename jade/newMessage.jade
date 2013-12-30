@@ -1,0 +1,23 @@
+.ui.narrow.container
+  h4.header New message
+  .ui.form
+    .field
+      input#recipient(type="text", placeholder="Recipient")
+    .field
+      textarea#message(placeholder="Message body")
+    a.ui.green.button#send Send
+    script.
+      $('#send').click(function(){
+        sms.send(
+          $('#recipient').val(),
+          $('#message').val(),
+          "",
+          function(){
+            $('#recipient').val('');
+            $('#message').val('');
+            document.location.hash='/';
+          },
+          function(e){ alert('Message failed: '+e.toString())}
+          );
+      });
+

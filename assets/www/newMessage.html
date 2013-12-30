@@ -1,0 +1,14 @@
+<div class="ui narrow container"><h4 class="header">New message</h4><div class="ui form"><div class="field"><input id="recipient" type="text" placeholder="Recipient"/></div><div class="field"><textarea id="message" placeholder="Message body"></textarea></div><a id="send" class="ui green button">Send</a><script>$('#send').click(function(){
+  sms.send(
+    $('#recipient').val(),
+    $('#message').val(),
+    "",
+    function(){
+      $('#recipient').val('');
+      $('#message').val('');
+      document.location.hash='/';
+    },
+    function(e){ alert('Message failed: '+e.toString())}
+    );
+});
+</script></div></div>

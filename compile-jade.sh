@@ -1,0 +1,2 @@
+#!/bin/bash
+jade --no-colors --out assets/www jade | perl -pe 's/\e\[?.*?[\@-~]//g'

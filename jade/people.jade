@@ -1,0 +1,9 @@
+.ui.small.feed#people-list
+  .event(ng-repeat="convo in convos", ng-click="seeConversation()")
+    .label
+      img(src="http://robohash.org/{{convo.number}}.png?size=100x100&set=set3&bgset=bg2")
+    .content
+      abbr.date {{convo.lastTextedAt | fromNow }}
+      strong.summary {{convo.name}}
+      .extra {{convo.lastText}} 
+        //pre {{convo.json}}
